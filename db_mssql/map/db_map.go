@@ -39,8 +39,10 @@ func main(){
 	}
 	defer rows.Close()
 
-	//遍历每一行
+	//通过连接对象执行查询
 	colNames, _ :=rows.Columns()
 	var cols = make([]interface{},len(colNames))
+
+	
 
 }
