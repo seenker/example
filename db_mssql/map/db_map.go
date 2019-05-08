@@ -33,7 +33,7 @@ func main(){
 	defer db.Close()
 
 	//通过连接对象执行查询
-	rows, err :=db.Query(`select [USERID] ,[BADGENUMBER],[SSN],[NAME],[GENDER] from [USERINFO]`)
+	rows, err :=db.Query(`select [USERID] ,[BADGENUMBER],isnull([SSN],'0'),[NAME],isnull([GENDER],'a') from [USERINFO]`)
 	if err !=nil{
 		log.Fatal("Query failed:",err.Error())
 	}
