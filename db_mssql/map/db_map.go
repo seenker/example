@@ -15,7 +15,7 @@ type AccessRegion struct{
 	description			string
 }
 func main(){
-	var isdebug = true
+
 	var server = "localhost"
 	var port = 1433
 	var user = "sa"
@@ -39,10 +39,19 @@ func main(){
 	}
 	defer rows.Close()
 
-	//通过连接对象执行查询
-	colNames, _ :=rows.Columns()
-	var cols = make([]interface{},len(colNames))
-
 	
+	var rowsData []*AccessRegion
+	//遍历每一行
+	for rows.Next(){
+		var row = new(AccessRegion)
+		rows.Scan(&row.region_id,&row.provider_id,&row.region_name,&row.billing_region_name,&row.description)
+		rowsData = append(rowsData,row)
+	}
+
+	//print array
+	for _, ar :=range rowsData{
+		fmt.Print(ar.region_id,"\t",ar.provider_id,"\t",ar.region_name,"\t",ar.billing_region_name,"\t",ar.description)
+		fmt.Println()
+	}
 
 }
